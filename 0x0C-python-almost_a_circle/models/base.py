@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+"""Defines a base model class."""
 import json
 import csv
 import turtle
@@ -7,6 +8,10 @@ import turtle
 
 class Base:
     """Base model.
+
+    This Represents the "base" for all other classes in project 0x0C*.
+
+    Private Class Attributes:
         __nb_object (int): Number of instantiated Bases.
     """
 
@@ -25,7 +30,7 @@ class Base:
             self.id = Base.__nb_objects
 
     @staticmethod
-    def json_string_to(list_dictionaries):
+    def to_json_string(list_dictionaries):
         """Return the JSON serialization of a list of dicts.
 
         Args:
@@ -48,10 +53,10 @@ class Base:
                 jsonfile.write("[]")
             else:
                 list_dicts = [o.to_dictionary() for o in list_objs]
-                jsonfile.write(Base.json_string_to(list_dicts))
+                jsonfile.write(Base.to_json_string(list_dicts))
 
     @staticmethod
-    def json_string_from(json_string):
+    def from_json_string(json_string):
         """Return the deserialization of a JSON string.
 
         Args:
@@ -92,7 +97,7 @@ class Base:
         filename = str(cls.__name__) + ".json"
         try:
             with open(filename, "r") as jsonfile:
-                list_dicts = Base.json_string_from(jsonfile.read())
+                list_dicts = Base.from_json_string(jsonfile.read())
                 return [cls.create(**d) for d in list_dicts]
         except IOError:
             return []
@@ -123,6 +128,9 @@ class Base:
 
         Reads from `<cls.__name__>.csv`.
 
+        Returns:
+            If the file does not exist - an empty list.
+            Otherwise - a list of instantiated classes.
         """
         filename = cls.__name__ + ".csv"
         try:
@@ -133,14 +141,15 @@ class Base:
                     fieldnames = ["id", "size", "x", "y"]
                 list_dicts = csv.DictReader(csvfile, fieldnames=fieldnames)
                 list_dicts = [dict([k, int(v)] for k, v in d.items())
-                            for d in list_dicts]
+                              for d in list_dicts]
                 return [cls.create(**d) for d in list_dicts]
         except IOError:
             return []
 
     @staticmethod
     def draw(list_rectangles, list_squares):
-        """
+        """Draw Rectangles and Squares using the turtle module.
+
         Args:
             list_rectangles (list): A list of Rectangle objects to draw.
             list_squares (list): A list of Square objects to draw.
