@@ -38,9 +38,9 @@ How to import a file
 12-object.js | JS script to replace the value 12 with 89
 13-add.js | JS function that returns the addition of 2 integers
 100-let_me_const.js | JS file that modifies the value of myVar (in another file) to 333
-101-call_me_moby.js | JS function that executes a function x times
-102-add_me_maybe.js | JS function that increments and calls a function
-103-object_fct.js | JS script that adds a new function that increments the integer value of the object myObject
+/n 101-call_me_moby.js | JS function that executes a function x times
+/n 102-add_me_maybe.js | JS function that increments and calls a function
+/n 103-object_fct.js | JS script that adds a new function that increments the integer value of the object myObject
 
 ## Author
 Ermiyas Solomon
